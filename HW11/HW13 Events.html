@@ -1,0 +1,118 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn-msg">Show message</button>
+    <button id="btn-generate">Generate item</button>
+    <p>
+        <strong id="tag">Tag:</strong>
+    </p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+
+    <script>
+        // 1. По нажатию кнопки должен появиться алерт с текстом кнопки
+
+        let brn = document.querySelector('button');
+        brn.addEventListener('click', function () { alert(brn.textContent); });
+
+        // 2. При наведении красного цвета, если убрать, прежнего цвета
+
+        brn.addEventListener('mouseover', function () { brn.style.background = 'red' });
+        brn.addEventListener('mouseout', function () { brn.style.background = '' });
+
+        // 3. При нажатии на любой узел документа показать в элементе с id=tag имя тега нажатого элемента
+        var elems = document.body.childNodes;
+        elems = Array.prototype.slice.call(elems);
+        elems.forEach(element => {
+            // element.addEventListener('click', function (event) { document.querySelector('p').textContent = `Tag: ${event.currentTarget.nodeName}`});
+            element.addEventListener('click', function (event) { document.querySelector('p').textContent = `Tag: ${event.target.nodeName}` });
+        });
+
+        // 4
+        // let elemUl = document.querySelector('ul');
+        // let nextLiNum = elemUl.children.length;
+
+        // let event = new CustomEvent('info');
+
+        // elemUl.addEventListener('info', function (e) {
+        //     let newLi = document.createElement('li');
+        //     nextLiNum++;
+        //     newLi.textContent = 'item ' + nextLiNum;
+        //     return elemUl.appendChild(newLi)
+        // });
+
+        // let idBtnGenerate = document.getElementById('btn-generate');
+        // let i = elemUl.dispatchEvent(event);
+        // idBtnGenerate.addEventListener('click', i);
+
+
+
+
+
+        // var customEvent = new Event('custom'),
+
+        //     link = document.querySelector('a'),
+        //     result = document.getElementById('result');
+
+        // link.addEventListener('custom', function (e) {
+        //     result.innerHTML += '<br>' + 'custom event fired: ' + e.target.tagName;
+        // });
+
+
+        // link.dispatchEvent(customEvent);
+
+        // function addLi() {
+
+        //     let elemUl = document.querySelector('ul');
+        //     let nextLiNum = elemUl.children.length;
+
+        //     return function () {
+        //         let newLi = document.createElement('li');
+        //         nextLiNum++;
+        //         newLi.textContent = 'item ' + nextLiNum;
+        //         return elemUl.appendChild(newLi)
+        //     }
+        // };
+
+        // let newAddLi = addLi();
+        // let idBtnGenerate = document.getElementById('btn-generate');
+        // idBtnGenerate.addEventListener('click', newAddLi);
+
+
+
+
+
+
+
+
+        function addLi() {
+
+            let elemUl = document.querySelector('ul');
+            let nextLiNum = elemUl.children.length;
+
+            return function () {
+                let newLi = document.createElement('li');
+                nextLiNum++;
+                newLi.textContent = 'item ' + nextLiNum;
+                return elemUl.appendChild(newLi)
+            }
+        };
+
+        let newAddLi = addLi();
+        let idBtnGenerate = document.getElementById('btn-generate');
+        idBtnGenerate.addEventListener('click', newAddLi);
+
+
+    </script>
+</body>
+
+</html>
