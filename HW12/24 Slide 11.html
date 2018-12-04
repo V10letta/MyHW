@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css"></script>
+</head>
+
+<body>
+    <div>
+        <article>
+            <p>Lorem ipsum dolor sit amet, odio omnesque ius cu, quo ex atqui antiopam. At detracto menandri eos. Duo in causae
+                viderer, graeci
+                <a href="#">reprehendunt</a> has in. Decore
+                <mark>nemore</mark> philosophia te pro, nobis legere causae ex mei, odio putant mentitum ea ius. Vix nostro deserunt
+                explicari eu.</p>
+        </article>
+    </div>
+    <ul>
+        <li>
+            <a href="#">Link1</a>
+        </li>
+        <li>
+            <a href="#">Link2</a>
+        </li>
+        <li>
+            <a href="#">Link3</a>
+        </li>
+        <li>
+            <a href="#">Link4</a>
+        </li>
+    </ul>
+    <span></span>
+    <a href="#">Some link</a>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.clear();
+
+            // 1 - Не использую InnerHTML добавить в список несколько li с классом new-item и текстом item + номер li
+
+            function createLi() {
+                let li = document.createElement('li');
+                let createText = `item ${document.querySelectorAll('li').length}`
+                let text = document.createTextNode(createText);
+
+                li.className = "new-item";
+
+                li.appendChild(text);
+                return document.querySelector('ul').appendChild(li);
+            }
+            createLi();
+
+
+            // 2. Создать три элемента strong и добавить их в конец ссылок , которые находятся внутри списка ul 
+            // (в каждую ссылку один strong)
+
+            let cStrong = document.createElement('strong');
+            let getArrayNode = [...document.querySelectorAll('li a')];
+
+            getArrayNode.map(function (el) {
+                return el.appendChild(cStrong.cloneNode());
+            })
+
+            // 3 В начало документа добавить картинку img с атрибутами srl и alt 
+
+            //  document.body.insertAdjacentHTML('afterbegin', '<img alt="debug girl" src="http://bm.img.com.ua/nxs/img/prikol/images/large/5/4/328045.gif">');
+
+            // 4 Найти на странице элемент mark, добавить в конец содержимого текст green, и на элемент установить класс
+
+            let elem = document.querySelector('mark');
+            elem.className = 'green';
+
+            let addText = document.createTextNode('Green');
+            elem.appendChild(addText);
+
+        });  
+    </script>
+</body>
+
+</html>
