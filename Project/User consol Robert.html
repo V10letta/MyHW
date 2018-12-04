@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <input type="text" id="input1">
+    <button id="addUser"> Add user </button>
+
+    <div id="divchik">
+
+    </div>
+
+    <input type="text" id="input2">
+    <button id="search"> search user </button>
+
+    <div id="divchik2">
+
+    </div>
+
+
+    <script>
+        const users = [];
+
+        function addList(users1, elementName) {
+            const a = document.getElementById(elementName);
+
+            let list = "<ul>";
+
+            // users1.forEach(user => {
+            //     list += `<li> ${user.name} - ${user.age} </li>`
+            // });
+
+            const elements = users1.map(user => {
+                return `<li> ${user.name} - ${user.age} <button class = "clickDel"> Delete </button></li>`
+            });
+
+            list += elements.join('');
+
+
+            list += "</ul>";
+
+            a.innerHTML = list;
+
+
+
+        }
+
+
+
+
+        const button = document.getElementById("addUser");
+
+
+        button.onclick = function (event) {
+            const text = document.getElementById("input1");
+            try {
+                if(text.value.indexOf(' ') === -1){
+                    throw new Error('write with probel');
+                }
+            } catch (error) {
+                return alert(error.message);
+            }
+            
+            const [name, age] = text.value.split(' ');
+
+            const user = {
+                name,
+                age,
+            };
+            users.push(user);
+
+            addList(users, "divchik");
+
+            const delBut = document.getElementsByClassName("clickDel");
+
+            [...delBut].forEach(element => {
+                element.onclick = function () {
+                    this.parentElement.remove();
+                }
+            });
+        }
+
+
+
+
+        function searchList(text, users1) {
+
+            const result = users1.filter(word => word.name.indexOf(text) !== -1);
+
+            addList(result, "divchik2");
+        }
+
+        const button2 = document.getElementById("search");
+
+        button2.onclick = function (even) {
+            const text1 = document.getElementById("input2").value;
+            searchList(text1, users);
+        }
+    </script>
+</body>
+
+</html>
